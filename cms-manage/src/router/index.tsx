@@ -1,5 +1,6 @@
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
+import Loading from '../components/Loading'
 import App from "App";
 
 interface Iroute {
@@ -27,7 +28,7 @@ const renderRouter = (item:{path:string,component:React.FC<{}>},index:number):Re
 
 const MyRouter = () => (
   <Router>
-    <Suspense fallback={<div>loading...</div>}>
+    <Suspense fallback={<div><Loading /></div>}>
       <Routes>
         {
           routeArr.map( (item, index) => {
