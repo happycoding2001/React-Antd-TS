@@ -21,8 +21,18 @@ let routeArr: Iroute[] = [
   { path: "/register", component: lazy(() => import("views/Register")) },
 ];
 
-const renderRouter = (item:{path:string,component:React.FC<{}>},index:number):React.ReactElement | null=>{
- return <Route key={index} path={item.path} element={<item.component />}></Route>
+
+const renderRouter = (item:Iroute,index:number):React.ReactElement | null=>{
+  if(!item.children){
+    return <Route key={index} path={item.path} element={<item.component />}></Route>
+  }else{
+   return (
+    <Route key={index} path={item.path} element={<item.component />}>
+      {renderRouter(item.children)}
+    </Route>
+   )
+  }
+ 
 }
 
 const MyRouter = () => (
